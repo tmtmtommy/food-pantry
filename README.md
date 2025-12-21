@@ -67,4 +67,5 @@
   - pundit（認可）  
   - RSpec（テスト）  
 
-  ※ 画面遷移図・ER図は課題2以降で追記予定です。
+## 画面遷移図
+  https://www.figma.com/design/PbYEwGSpdMRaJD7WMNI3jH/food-pantry?node-id=0-1&t=qaMk60gh7WmObDCh-1
