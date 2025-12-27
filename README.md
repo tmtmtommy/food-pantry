@@ -68,3 +68,6 @@
 
 ## 画面遷移図
 https://www.figma.com/design/PbYEwGSpdMRaJD7WMNI3jH/food-pantry?node-id=43-97&t=qaMk60gh7WmObDCh-1
+
+## ER図
+![ER図](images/er_diagram.png)
