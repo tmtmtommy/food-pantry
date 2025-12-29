@@ -1,2 +1,11 @@
-<h1>Mypage#show</h1>
-<p>Find me in app/views/mypage/show.html.erb</p>
+<div class="container mt-5">
+  <h1>マイページ</h1>
+
+  <p>ログイン中のメールアドレス：</p>
+  <p><strong><%= current_user.email %></strong></p>
+
+  <%= button_to "ログアウト",
+        destroy_user_session_path,
+        method: :delete,
+        class: "btn btn-danger mt-3" %>
+</div>
