@@ -3,27 +3,45 @@
   <head>
     <title><%= content_for(:title) || "Myapp" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Myapp">
-    <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= yield :head %>
-
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
+  <body class="pb-5">
     <%= yield %>
+
+    <%# 下部ナビゲーション %>
+    <% if user_signed_in? %>
+      <nav class="fixed-bottom bg-light border-top">
+        <div class="container">
+          <div class="d-flex justify-content-around align-items-center py-2">
+
+            <%= link_to stocks_path,
+                class: "text-center text-decoration-none #{'text-primary fw-bold' if current_page?(stocks_path)}" do %>
+              <div>📦</div>
+              <small>在庫</small>
+            <% end %>
+
+            <%= link_to "#",
+                class: "btn btn-primary rounded-circle d-flex align-items-center justify-content-center",
+                style: "width:56px; height:56px; margin-top:-20px;" do %>
+              <span style="font-size:24px;">＋</span>
+            <% end %>
+
+            <%= link_to mypage_path,
+                class: "text-center text-decoration-none #{'text-primary fw-bold' if current_page?(mypage_path)}" do %>
+              <div>👤</div>
+              <small>マイページ</small>
+            <% end %>
+
+          </div>
+        </div>
+      </nav>
+    <% end %>
+    <%# ここまで %>
+
   </body>
 </html>
