@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # get "stocks/index" ↓に変更（ルーティングの変更）
+  resources :stocks, only: [:index]
+
   devise_for :users
   get "home/top"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
