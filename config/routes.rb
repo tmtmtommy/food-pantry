@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # get "mypage/show" ↓に変更（ルーティングの変更）
+  resource :mypage, only: [:show]
+
   # get "stocks/index" ↓に変更（ルーティングの変更）
   resources :stocks, only: [:index]
 
