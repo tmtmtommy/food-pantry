@@ -1,0 +1,24 @@
+<h1>在庫を登録</h1>
+
+<%= form_with model: @stock do |f| %>
+
+  <%# エラー表示 %>
+  <% if @stock.errors.any? %>
+    <ul>
+      <% @stock.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%# ここまで %>
+
+  <div>
+    <%= f.label :custom_name, "食材名" %><br>
+    <%= f.text_field :custom_name %>
+  </div>
+
+  <div>
+    <%= f.submit "登録" %>
+  </div>
+
+<% end %>

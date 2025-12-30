@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   resource :mypage, only: [:show]
 
   # get "stocks/index" ↓に変更（ルーティングの変更）
-  resources :stocks, only: [:index]
+  # 在庫登録ページ作成時に", :new"を追加
+  resources :stocks, only: [:index, :new]
 
   devise_for :users
   get "home/top"
