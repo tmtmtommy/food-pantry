@@ -3,4 +3,9 @@ class StocksController < ApplicationController
 
   def index
   end
+
+  def new
+    @stock = Stock.new
+  end
+
 end
