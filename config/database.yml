@@ -19,14 +19,21 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   # max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: db # compose.ymlで定義したサービス名
-  username: postgres # 接続ユーザー名
-  password: password # 接続パスワード（database.yml のパスワードと一致） 
+
+  # ↓在庫登録ページのデプロイでエラーが出たため削除し、developmentに移動
+  # host: db # compose.ymlで定義したサービス名
+  # username: postgres # 接続ユーザー名
+  # password: password # 接続パスワード（database.yml のパスワードと一致） 
 
 
 development:
   <<: *default
   database: myapp_development
+
+  # defaultから移動
+  host: db # compose.ymlで定義したサービス名
+  username: postgres # 接続ユーザー名
+  password: password # 接続パスワード（database.yml のパスワードと一致） 
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -62,6 +69,11 @@ test:
   <<: *default
   database: myapp_test
 
+  # 追加
+  host: db # compose.ymlで定義したサービス名
+  username: postgres # 接続ユーザー名
+  password: password # 接続パスワード（database.yml のパスワードと一致） 
+
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.
@@ -88,21 +100,43 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+
+# 在庫一覧ページのデプロイエラーのため修正
+# production:
+#   primary: &primary_production
+#     <<: *default
+#     database: myapp_production
+#     username: myapp
+#     password: <%= ENV["MYAPP_DATABASE_PASSWORD"] %>
+#   cache:
+#     <<: *primary_production
+#     database: myapp_production_cache
+#     migrations_paths: db/cache_migrate
+#   queue:
+#     <<: *primary_production
+#     database: myapp_production_queue
+#     migrations_paths: db/queue_migrate
+#   cable:
+#     <<: *primary_production
+#     database: myapp_production_cable
+#     migrations_paths: db/cable_migrate
+
 production:
   primary: &primary_production
     <<: *default
-    database: myapp_production
-    username: myapp
-    password: <%= ENV["MYAPP_DATABASE_PASSWORD"] %>
+    url: <%= ENV["DATABASE_URL"] %>
+
   cache:
-    <<: *primary_production
-    database: myapp_production_cache
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
     migrations_paths: db/cache_migrate
+
   queue:
-    <<: *primary_production
-    database: myapp_production_queue
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
     migrations_paths: db/queue_migrate
+
   cable:
-    <<: *primary_production
-    database: myapp_production_cable
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
     migrations_paths: db/cable_migrate
