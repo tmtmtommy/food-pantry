@@ -1,24 +1,81 @@
-<h1>在庫を登録</h1>
+<h1>在庫登録</h1>
 
-<%= form_with model: @stock do |f| %>
-
-  <%# エラー表示 %>
-  <% if @stock.errors.any? %>
+<% if @stock.errors.any? %>
+  <div style="color: red;">
     <ul>
       <% @stock.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
     </ul>
-  <% end %>
-  <%# ここまで %>
-
-  <div>
-    <%= f.label :custom_name, "食材名" %><br>
-    <%= f.text_field :custom_name %>
   </div>
-
-  <div>
-    <%= f.submit "登録" %>
-  </div>
-
 <% end %>
+
+<%= form_with model: @stock, local: true do |f| %>
+  <div>
+    <%= f.label :purchased_on, "購入日" %><br>
+    <%= f.date_field :purchased_on %>
+  </div>
+
+  <hr>
+
+  <div>
+    <p><strong>登録方法</strong></p>
+
+    <label>
+      <input type="radio" name="mode" value="master" checked>
+      野菜マスターから選択
+    </label>
+
+    <label style="margin-left: 12px;">
+      <input type="radio" name="mode" value="custom">
+      自由入力
+    </label>
+  </div>
+
+  <div id="master-area" style="margin-top: 12px;">
+    <%= f.label :vegetable_id, "野菜を選択" %><br>
+    <%= f.collection_select :vegetable_id, @vegetables, :id, :name, include_blank: "選択してください" %>
+  </div>
+
+  <!-- ✅ 初期アクセス時は自由入力を非表示にする -->
+  <div id="custom-area" style="margin-top: 12px; display: none;">
+    <%= f.label :custom_name, "野菜名（自由入力）" %><br>
+    <%= f.text_field :custom_name, placeholder: "例：みょうが" %>
+  </div>
+
+  <div style="margin-top: 16px;">
+    <%= f.submit "登録する" %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const radios = document.querySelectorAll('input[name="mode"]');
+    const masterArea = document.getElementById('master-area');
+    const customArea = document.getElementById('custom-area');
+
+    function toggle() {
+      const checked = document.querySelector('input[name="mode"]:checked');
+      const mode = checked ? checked.value : 'master';
+
+      if (mode === 'master') {
+        masterArea.style.display = '';
+        customArea.style.display = 'none';
+        // 自由入力を消す（両方入力禁止対策）
+        const customInput = document.querySelector('#stock_custom_name');
+        if (customInput) customInput.value = '';
+      } else {
+        masterArea.style.display = 'none';
+        customArea.style.display = '';
+        // マスター選択を消す（両方入力禁止対策）
+        const select = document.querySelector('#stock_vegetable_id');
+        if (select) select.value = '';
+      }
+    }
+
+    radios.forEach(r => r.addEventListener('change', toggle));
+
+    // ✅ 初回アクセス時にも必ず反映
+    toggle();
+  });
+</script>

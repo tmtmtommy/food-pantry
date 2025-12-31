@@ -2,7 +2,14 @@ class Stock < ApplicationRecord
   belongs_to :user
   belongs_to :vegetable, optional: true
 
+  validates :purchased_on, presence: true
+  validates :custom_name, length: { maximum: 50 }, allow_blank: true
+
   validate :vegetable_or_custom_name_xor
+
+  def display_name
+    vegetable&.name.presence || custom_name
+  end
 
   private
 

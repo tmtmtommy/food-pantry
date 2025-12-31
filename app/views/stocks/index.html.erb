@@ -1,4 +1,27 @@
-<div class="container mt-5">
-  <h1>在庫一覧（仮）</h1>
-  <p>ここに在庫の一覧が表示されます。</p>
-</div>
+<h1>在庫一覧</h1>
+
+<p><%= link_to "在庫登録", new_stock_path %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>食材</th>
+      <th>購入日</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stocks.each do |stock| %>
+      <tr>
+        <td><%= stock.display_name %></td>
+        <td><%= stock.purchased_on %></td>
+        <td>
+          <%= button_to "使い切った",
+                        stock_path(stock),
+                        method: :delete,
+                        data: { turbo_confirm: "削除しますか？" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
