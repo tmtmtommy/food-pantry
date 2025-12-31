@@ -1,24 +1,14 @@
 Rails.application.routes.draw do
-  # get "mypage/show" ↓に変更（ルーティングの変更）
-  resource :mypage, only: [:show]
-
-  # get "stocks/index" ↓に変更（ルーティングの変更）
-  # 在庫登録ページ作成時に", :new"を追加
-  resources :stocks, only: [:index, :new]
-
   devise_for :users
-  get "home/top"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
-
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Defines the root path route ("/")
+  
   # root "posts#index"
   root "home#top"
+
+  resources :vegetables, only: [:index]
+  resources :stocks, only: [:index, :new, :create, :destroy]
+  resource :mypage, only: [:show]
+
+  get "home/top"
+  get "up" => "rails/health#show", as: :rails_health_check
+
 end
