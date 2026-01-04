@@ -13,6 +13,12 @@ class Stock < ApplicationRecord
     vegetable&.name.presence || custom_name
   end
 
+  def elapsed_days
+    return nil if purchased_on.blank?
+
+    (Date.current - purchased_on).to_i
+  end
+
   private
 
   def vegetable_or_custom_name_xor

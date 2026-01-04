@@ -7,6 +7,7 @@
     <tr>
       <th>食材</th>
       <th>購入日</th>
+      <th>経過日数</th>
       <th></th>
     </tr>
   </thead>
@@ -15,6 +16,13 @@
       <tr>
         <td><%= stock.display_name %></td>
         <td><%= stock.purchased_on %></td>
+        <td>
+          <% if stock.elapsed_days == 0 %>
+            今日
+          <% else %>
+            <%= stock.elapsed_days %> 日
+          <% end %>
+        </td>
         <td>
           <%= button_to "使い切った",
                         stock_path(stock),
