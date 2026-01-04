@@ -2,16 +2,18 @@ class StocksController < ApplicationController
   before_action :authenticate_user! # 在庫一覧をログイン必須にする
 
   def index
-    @stocks = current_user.stocks.includes(:vegetable).order(purchased_on: :desc, created_at: :desc)
+    @stocks = current_user.stocks.includes(:vegetable).order(purchased_on: :asc, created_at: :asc)
   end
 
   def new
     @stock = Stock.new(purchased_on: Date.current)
+    @stock.mode = "master"  # 初期値
     @vegetables = Vegetable.order(:name)
   end
 
   def create
     @stock = current_user.stocks.new(stock_params)
+    @stock.mode = params.dig(:stock, :mode) # 失敗時に保持
     @vegetables = Vegetable.order(:name)
 
     if @stock.save

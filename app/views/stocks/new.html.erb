@@ -22,12 +22,12 @@
     <p><strong>登録方法</strong></p>
 
     <label>
-      <input type="radio" name="mode" value="master" checked>
+      <%= f.radio_button :mode, "master", checked: (@stock.mode != "custom") %>
       野菜マスターから選択
     </label>
 
     <label style="margin-left: 12px;">
-      <input type="radio" name="mode" value="custom">
+      <%= f.radio_button :mode, "custom", checked: (@stock.mode == "custom") %>
       自由入力
     </label>
   </div>
@@ -37,7 +37,7 @@
     <%= f.collection_select :vegetable_id, @vegetables, :id, :name, include_blank: "選択してください" %>
   </div>
 
-  <!-- ✅ 初期アクセス時は自由入力を非表示にする -->
+  <!-- ✅ 初期アクセス時は自由入力を非表示にする（JSで適切に切り替える） -->
   <div id="custom-area" style="margin-top: 12px; display: none;">
     <%= f.label :custom_name, "野菜名（自由入力）" %><br>
     <%= f.text_field :custom_name, placeholder: "例：みょうが" %>
@@ -49,33 +49,45 @@
 <% end %>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const radios = document.querySelectorAll('input[name="mode"]');
+  function setupStockModeToggle() {
+    const radios = document.querySelectorAll('input[name="stock[mode]"]');
     const masterArea = document.getElementById('master-area');
     const customArea = document.getElementById('custom-area');
 
+    if (!radios.length || !masterArea || !customArea) return;
+
     function toggle() {
-      const checked = document.querySelector('input[name="mode"]:checked');
+      const checked = document.querySelector('input[name="stock[mode]"]:checked');
       const mode = checked ? checked.value : 'master';
 
       if (mode === 'master') {
         masterArea.style.display = '';
         customArea.style.display = 'none';
+
         // 自由入力を消す（両方入力禁止対策）
-        const customInput = document.querySelector('#stock_custom_name');
+        const customInput = document.getElementById('stock_custom_name');
         if (customInput) customInput.value = '';
       } else {
         masterArea.style.display = 'none';
         customArea.style.display = '';
+
         // マスター選択を消す（両方入力禁止対策）
-        const select = document.querySelector('#stock_vegetable_id');
+        const select = document.getElementById('stock_vegetable_id');
         if (select) select.value = '';
       }
     }
 
     radios.forEach(r => r.addEventListener('change', toggle));
 
-    // ✅ 初回アクセス時にも必ず反映
-    toggle();
-  });
+    // ✅ 初期表示・復元時にも確実に反映（Turbo / bfcache 対策）
+    requestAnimationFrame(toggle);
+    setTimeout(toggle, 0);
+  }
+
+  // Turbo通常遷移
+  document.addEventListener("turbo:load", setupStockModeToggle);
+  // Turboキャッシュ復元（戻る/進む）
+  document.addEventListener("turbo:render", setupStockModeToggle);
+  // ブラウザの bfcache 復元対策
+  window.addEventListener("pageshow", setupStockModeToggle);
 </script>

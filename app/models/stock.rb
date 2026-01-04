@@ -1,4 +1,6 @@
 class Stock < ApplicationRecord
+  attr_accessor :mode
+
   belongs_to :user
   belongs_to :vegetable, optional: true
 
