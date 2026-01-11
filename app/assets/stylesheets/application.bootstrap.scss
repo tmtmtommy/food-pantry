@@ -1,2 +1,109 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+/* =========================
+   Top page（共通）
+========================= */
+
+.top-hero {
+  min-height: 100vh;
+  background: #8fe3ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.top-card {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.top-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.top-image-wrap {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-image {
+  width: 160px;
+  height: auto;
+}
+
+.top-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.top-login-btn {
+  border-radius: 12px;
+  padding: 10px 28px;
+  font-weight: 700;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
+}
+
+.top-signup-link {
+  font-size: 14px;
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.top-signup-link:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   スマホ用（〜576px）
+========================= */
+
+@media (max-width: 576px) {
+  .top-title {
+    font-size: 20px;
+  }
+
+  .top-image-wrap {
+    width: 180px;
+    height: 180px;
+  }
+
+  .top-image {
+    width: 140px;
+  }
+
+  .top-login-btn {
+    width: 100%;
+    padding: 12px 0;
+  }
+}
+
+/* =========================
+   タブレット以上（768px〜）
+========================= */
+
+@media (min-width: 768px) {
+  .top-card {
+    max-width: 420px;
+  }
+
+  .top-title {
+    font-size: 24px;
+  }
+
+  .top-image {
+    width: 180px;
+  }
+}
