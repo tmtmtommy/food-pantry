@@ -1,2 +1,253 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+/* =========================
+   Top page（共通）
+========================= */
+
+.top-hero {
+  min-height: 100vh;
+  background: #8fe3ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.top-card {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.top-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.top-image-wrap {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-image {
+  width: 160px;
+  height: auto;
+}
+
+.top-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.top-login-btn {
+  border-radius: 12px;
+  padding: 10px 28px;
+  font-weight: 700;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
+}
+
+.top-signup-link {
+  font-size: 14px;
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.top-signup-link:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   スマホ用（〜576px）
+========================= */
+
+@media (max-width: 576px) {
+  .top-title {
+    font-size: 20px;
+  }
+
+  .top-image-wrap {
+    width: 180px;
+    height: 180px;
+  }
+
+  .top-image {
+    width: 140px;
+  }
+
+  .top-login-btn {
+    width: 100%;
+    padding: 12px 0;
+  }
+}
+
+/* =========================
+   タブレット以上（768px〜）
+========================= */
+
+@media (min-width: 768px) {
+  .top-card {
+    max-width: 420px;
+  }
+
+  .top-title {
+    font-size: 24px;
+  }
+
+  .top-image {
+    width: 180px;
+  }
+}
+
+/* =========================
+   ログイン画面（Login / Signup）
+========================= */
+
+.auth-hero {
+  min-height: 100vh;
+  background: #8fe3ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 360px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 16px;
+  padding: 22px 18px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.auth-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.auth-input {
+  border-radius: 12px;
+}
+
+.auth-input:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+}
+
+.auth-primary-btn {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  width: 100px;
+  margin: 0 auto;
+}
+
+.auth-link {
+  color: #0d6efd;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+.form-check {
+  padding-left: 2.6em;
+}
+
+/* スマホ */
+@media (max-width: 576px) {
+  .auth-card {
+    max-width: 360px;
+    padding: 20px 16px;
+  }
+}
+
+/* タブレット以上 */
+@media (min-width: 768px) {
+  .auth-card {
+    max-width: 420px;
+    padding: 26px 22px;
+  }
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+/* Devise error messages */
+#error_explanation {
+  color: #dc3545; /* 文字色 */
+  border: 1px solid rgba(220, 53, 69, 0.35); /* ← ログインエラーと同系色 */
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+#error_explanation h2 {
+  color: #dc3545;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+#error_explanation ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+}
+
+#error_explanation li {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.flash {
+  max-width: 520px;
+  margin: 16px auto 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.flash-notice {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.flash-alert {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(220, 53, 69, 0.35);
+}
+
+.auth-flash {
+  margin: 0 0 14px 0;
+  font-size: 13px;
+  text-align: center;
+  padding: 6px 10px;
+}
+
+/* auth画面のエラーメッセージ文字色 */
+.auth-flash.flash-alert {
+  color: #dc3545; /* Bootstrapのdanger */
+  font-weight: 600;
+}
+

@@ -45,6 +45,9 @@ gem "image_processing", "~> 1.2"
 # Gemfile に devise を追加
 gem "devise"
 
+gem 'rails-i18n'
+gem 'devise-i18n'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
