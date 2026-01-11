@@ -1,11 +1,32 @@
-<div class="container mt-5">
-  <h1>マイページ</h1>
+<div class="auth-hero">
+  <div class="auth-card">
+    <div class="d-flex align-items-center gap-2">
+      <div class="d-flex align-items-center justify-content-center rounded-3 border"
+           style="width:44px;height:44px;background:rgba(255,255,255,.55);">
+        👤
+      </div>
+      <div>
+        <h2 class="auth-title mb-1">マイページ</h2>
+        <p class="text-muted mb-0">アカウント情報を確認できます</p>
+      </div>
+    </div>
 
-  <p>ログイン中のメールアドレス：</p>
-  <p><strong><%= current_user.email %></strong></p>
+    <div class="mt-4">
+      <div class="fw-bold small opacity-75">ログイン中のメールアドレス</div>
+      <div class="ms-1 ps-3 fw-bold"
+          style="border-color: rgba(0,0,0,0.08) !important;">
+        <%= current_user.email %>
+      </div>
+    </div>
 
-  <%= button_to "ログアウト",
-        destroy_user_session_path,
-        method: :delete,
-        class: "btn btn-danger mt-3" %>
+    <div class="d-flex justify-content-end mt-3">
+      <%= button_to destroy_user_session_path,
+            method: :delete,
+            class: "btn btn-outline-danger btn-sm bg-white d-flex align-items-center gap-1 mypage-logout-btn",
+            form: { data: { turbo_confirm: "ログアウトしますか？" } } do %>
+        <i class="bi bi-box-arrow-right"></i>
+        <span>ログアウト</span>
+      <% end %>
+    </div>
+  </div>
 </div>

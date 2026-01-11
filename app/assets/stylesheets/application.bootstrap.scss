@@ -423,3 +423,60 @@ body {
     max-width: 220px;
   }
 }
+
+/* =========================
+   MyPage
+========================= */
+
+.mypage-card {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 16px;
+  padding: 22px 18px;
+
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(6px);
+}
+
+.mypage-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mypage-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.mypage-label {
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0.8;
+  margin-bottom: 6px;
+}
+
+.mypage-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ログアウトボタン：中は常に白 */
+.mypage-logout-btn {
+  background: #fff !important;
+}
+.mypage-logout-btn:hover,
+.mypage-logout-btn:focus {
+  background: #fff !important;
+}
