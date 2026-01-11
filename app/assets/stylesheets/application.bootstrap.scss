@@ -194,15 +194,18 @@ body {
 
 /* Devise error messages */
 #error_explanation {
-  background: rgba(255, 255, 255, 0.7);
+  color: #dc3545; /* 文字色 */
+  border: 1px solid rgba(220, 53, 69, 0.35); /* ← ログインエラーと同系色 */
   border-radius: 12px;
   padding: 12px 14px;
   margin-bottom: 14px;
+  background: rgba(255, 255, 255, 0.85);
 }
 
 #error_explanation h2 {
-  font-size: 14px;
-  margin: 0 0 6px 0;
+  color: #dc3545;
+  font-size: 13px;
+  margin-bottom: 6px;
 }
 
 #error_explanation ul {
@@ -210,3 +213,41 @@ body {
   padding-left: 18px;
   font-size: 13px;
 }
+
+#error_explanation li {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.flash {
+  max-width: 520px;
+  margin: 16px auto 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.flash-notice {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.flash-alert {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(220, 53, 69, 0.35);
+}
+
+.auth-flash {
+  margin: 0 0 14px 0;
+  font-size: 13px;
+  text-align: center;
+  padding: 6px 10px;
+}
+
+/* auth画面のエラーメッセージ文字色 */
+.auth-flash.flash-alert {
+  color: #dc3545; /* Bootstrapのdanger */
+  font-weight: 600;
+}
+

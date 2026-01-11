@@ -2,6 +2,13 @@
   <div class="auth-card">
     <h2 class="auth-title text-center">ログイン</h2>
 
+    <% if flash[:alert] %>
+      <div class="flash flash-alert auth-flash">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+
+
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="mb-3">
         <%= f.label :email, "メールアドレス", class: "form-label" %>
