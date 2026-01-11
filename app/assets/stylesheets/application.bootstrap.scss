@@ -150,7 +150,7 @@
 .auth-primary-btn {
   background: #fff;
   border: 1px solid rgba(0,0,0,0.06);
-  width: 100px;
+  width: 150px;
   margin: 0 auto;
 }
 
@@ -249,5 +249,114 @@ body {
 .auth-flash.flash-alert {
   color: #dc3545; /* Bootstrapのdanger */
   font-weight: 600;
+}
+
+/* =========================
+   Page base
+========================= */
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 18px 16px 90px; /* 下部ナビ分余白 */
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0;
+}
+
+.page-subtitle {
+  font-size: 13px;
+  margin: 6px 0 0;
+  opacity: 0.8;
+}
+
+/* =========================
+   Stock list
+========================= */
+.stock-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stock-card {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 14px 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.stock-name {
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.stock-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.stock-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* =========================
+   Empty
+========================= */
+.empty-state {
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px dashed rgba(0,0,0,0.15);
+  border-radius: 16px;
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.empty-title {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.empty-subtitle {
+  font-size: 13px;
+  margin-top: 6px;
+  opacity: 0.85;
+}
+
+/* 食材名＋メタ情報を横並び */
+.stock-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.stock-name {
+  font-weight: 800;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.stock-label {
+  margin-right: 4px;
 }
 

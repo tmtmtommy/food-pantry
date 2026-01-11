@@ -19,6 +19,36 @@ class Stock < ApplicationRecord
     (Date.current - purchased_on).to_i
   end
 
+  def freshness_label
+    return nil if elapsed_days.nil?
+
+    case elapsed_days
+    when 0
+      "今日買った"
+    when 1..3
+      "3日以内"
+    when 4..7
+      "1週間以内"
+    else
+      "注意"
+    end
+  end
+
+  def freshness_badge_class
+    return "text-bg-light" if elapsed_days.nil?
+
+    case elapsed_days
+    when 0
+      "text-bg-success"
+    when 1..3
+      "text-bg-primary"
+    when 4..7
+      "text-bg-warning"
+    else
+      "text-bg-danger"
+    end
+  end
+
   private
 
   def vegetable_or_custom_name_xor

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root "home#top"
 
   resources :vegetables, only: [:index]
-  resources :stocks, only: [:index, :new, :create, :destroy]
+  resources :stocks, only: [:index, :new, :create, :update, :destroy]
   resource :mypage, only: [:show]
 
   get "home/top"
