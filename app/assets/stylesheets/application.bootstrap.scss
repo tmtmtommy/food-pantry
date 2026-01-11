@@ -360,3 +360,66 @@ body {
   margin-right: 4px;
 }
 
+/* =========================
+   Stock form
+========================= */
+.form-card {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 16px 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.form-section {
+  margin-bottom: 14px;
+}
+
+.form-label {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.form-help {
+  font-size: 12px;
+  opacity: 0.75;
+  margin-top: 6px;
+}
+
+.form-divider {
+  margin: 12px 0;
+  opacity: 0.15;
+}
+
+.form-actions {
+  margin-top: 12px;
+}
+
+.form-submit {
+  font-weight: 800;
+  border-radius: 12px;
+  padding: 10px 0;
+}
+
+/* =========================
+   Stock form
+========================= */
+.stock-form-card {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 18px 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+/* 購入日を小さめ＆左寄せに */
+.stock-date-input {
+  max-width: 180px;
+}
+
+/* スマホは少し広げる */
+@media (max-width: 576px) {
+  .stock-date-input {
+    max-width: 220px;
+  }
+}
