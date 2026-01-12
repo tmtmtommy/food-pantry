@@ -1,93 +1,75 @@
-<h1>在庫登録</h1>
-
-<% if @stock.errors.any? %>
-  <div style="color: red;">
-    <ul>
-      <% @stock.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
-<%= form_with model: @stock, local: true do |f| %>
-  <div>
-    <%= f.label :purchased_on, "購入日" %><br>
-    <%= f.date_field :purchased_on %>
+<div class="page">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">在庫登録</h1>
+      <p class="page-subtitle">購入した食材を登録します</p>
+    </div>
   </div>
 
-  <hr>
+  <div class="stock-form-card">
+    <%= form_with model: @stock,
+          url: stocks_path,
+          method: :post,
+          data: { turbo: false } do |f| %>
 
-  <div>
-    <p><strong>登録方法</strong></p>
+      <!-- 購入日：左寄せ＆横幅小さく -->
+      <div class="mb-3">
+        <%= f.label :purchased_on, "購入日", class: "form-label fw-bold" %>
+        <%= f.date_field :purchased_on,
+              class: "form-control stock-date-input",
+              value: (@stock.purchased_on || Date.current) %>
+      </div>
 
-    <label>
-      <%= f.radio_button :mode, "master", checked: (@stock.mode != "custom") %>
-      野菜マスターから選択
-    </label>
+      <!-- 登録方法 -->
+      <div class="mb-3">
+        <div class="form-label fw-bold mb-2">登録方法</div>
 
-    <label style="margin-left: 12px;">
-      <%= f.radio_button :mode, "custom", checked: (@stock.mode == "custom") %>
-      自由入力
-    </label>
+        <div class="d-flex flex-wrap gap-3">
+          <div class="form-check m-0">
+            <%= f.radio_button :mode, "master",
+                  checked: (@stock.mode != "custom"),
+                  class: "form-check-input",
+                  id: "mode_master" %>
+            <%= f.label :mode_master, "野菜マスターから選択",
+                  class: "form-check-label",
+                  for: "mode_master" %>
+          </div>
+
+          <div class="form-check m-0">
+            <%= f.radio_button :mode, "custom",
+                  checked: (@stock.mode == "custom"),
+                  class: "form-check-input",
+                  id: "mode_custom" %>
+            <%= f.label :mode_custom, "自由入力",
+                  class: "form-check-label",
+                  for: "mode_custom" %>
+          </div>
+        </div>
+      </div>
+
+      <!-- 野菜選択（master） -->
+      <div class="mb-3" id="master_fields">
+        <%= f.label :vegetable_id, "野菜を選択", class: "form-label fw-bold" %>
+        <%= f.collection_select :vegetable_id, @vegetables, :id, :name,
+              { include_blank: "選択してください" },
+              class: "form-select" %>
+        <div class="form-text">よく買う野菜はここから選ぶと楽です</div>
+      </div>
+
+      <!-- 自由入力（custom） -->
+      <div class="mb-3 d-none" id="custom_fields">
+        <%= f.label :custom_name, "食材名（自由入力）", class: "form-label fw-bold" %>
+        <%= f.text_field :custom_name,
+              class: "form-control",
+              placeholder: "例：しめじ、豆腐、牛乳 など" %>
+        <div class="form-text">マスターに無い食材はこちら</div>
+      </div>
+
+      <!-- ボタン：戻る（左）/ 登録（右）どちらも小さく -->
+      <div class="d-flex align-items-center mt-4">
+        <%= link_to "戻る", stocks_path, class: "btn btn-outline-secondary btn-sm" %>
+        <%= f.submit "登録する", class: "btn btn-primary btn-sm ms-auto" %>
+      </div>
+    <% end %>
   </div>
-
-  <div id="master-area" style="margin-top: 12px;">
-    <%= f.label :vegetable_id, "野菜を選択" %><br>
-    <%= f.collection_select :vegetable_id, @vegetables, :id, :name, include_blank: "選択してください" %>
-  </div>
-
-  <!-- ✅ 初期アクセス時は自由入力を非表示にする（JSで適切に切り替える） -->
-  <div id="custom-area" style="margin-top: 12px; display: none;">
-    <%= f.label :custom_name, "野菜名（自由入力）" %><br>
-    <%= f.text_field :custom_name, placeholder: "例：みょうが" %>
-  </div>
-
-  <div style="margin-top: 16px;">
-    <%= f.submit "登録する" %>
-  </div>
-<% end %>
-
-<script>
-  function setupStockModeToggle() {
-    const radios = document.querySelectorAll('input[name="stock[mode]"]');
-    const masterArea = document.getElementById('master-area');
-    const customArea = document.getElementById('custom-area');
-
-    if (!radios.length || !masterArea || !customArea) return;
-
-    function toggle() {
-      const checked = document.querySelector('input[name="stock[mode]"]:checked');
-      const mode = checked ? checked.value : 'master';
-
-      if (mode === 'master') {
-        masterArea.style.display = '';
-        customArea.style.display = 'none';
-
-        // 自由入力を消す（両方入力禁止対策）
-        const customInput = document.getElementById('stock_custom_name');
-        if (customInput) customInput.value = '';
-      } else {
-        masterArea.style.display = 'none';
-        customArea.style.display = '';
-
-        // マスター選択を消す（両方入力禁止対策）
-        const select = document.getElementById('stock_vegetable_id');
-        if (select) select.value = '';
-      }
-    }
-
-    radios.forEach(r => r.addEventListener('change', toggle));
-
-    // ✅ 初期表示・復元時にも確実に反映（Turbo / bfcache 対策）
-    requestAnimationFrame(toggle);
-    setTimeout(toggle, 0);
-  }
-
-  // Turbo通常遷移
-  document.addEventListener("turbo:load", setupStockModeToggle);
-  // Turboキャッシュ復元（戻る/進む）
-  document.addEventListener("turbo:render", setupStockModeToggle);
-  // ブラウザの bfcache 復元対策
-  window.addEventListener("pageshow", setupStockModeToggle);
-</script>
+</div>

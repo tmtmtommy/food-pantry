@@ -1,35 +1,65 @@
-<h1>在庫一覧</h1>
+<div class="page stock-index-page">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">在庫</h1>
+      <p class="page-subtitle">冷蔵庫の在庫を一覧で確認できます</p>
+    </div>
 
-<p><%= link_to "在庫登録", new_stock_path %></p>
+    <%= link_to "＋",
+        new_stock_path,
+        class: "btn btn-primary btn-sm rounded-circle d-none d-md-inline-flex align-items-center justify-content-center",
+        style: "width:40px; height:40px;" %>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>食材</th>
-      <th>購入日</th>
-      <th>経過日数</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @stocks.each do |stock| %>
-      <tr>
-        <td><%= stock.display_name %></td>
-        <td><%= stock.purchased_on %></td>
-        <td>
-          <% if stock.elapsed_days == 0 %>
-            今日
-          <% else %>
-            <%= stock.elapsed_days %> 日
-          <% end %>
-        </td>
-        <td>
-          <%= button_to "使い切った",
-                        stock_path(stock),
-                        method: :delete,
-                        data: { turbo_confirm: "削除しますか？" } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <% if @stocks.present? %>
+    <div class="stock-list">
+      <% @stocks.each do |stock| %>
+        <div class="stock-card <%= 'is-danger' if stock.elapsed_days.to_i >= 7 %>">
+          <div class="stock-main">
+            <div class="stock-header">
+              <!-- ラベル：食材名の左 -->
+              <% if stock.freshness_label.present? %>
+                <span class="badge <%= stock.freshness_badge_class %> stock-label">
+                  <%= stock.freshness_label %>
+                </span>
+              <% end %>
+
+              <!-- 食材名 -->
+              <div class="stock-name">
+                <%= stock.display_name %>
+              </div>
+
+              <!-- 購入日・経過日：右側 -->
+              <div class="stock-meta inline">
+                <% if stock.purchased_on.present? %>
+                  <span class="badge text-bg-light">
+                    <%= l(stock.purchased_on) %>
+                  </span>
+                <% end %>
+
+                <% if stock.elapsed_days.present? %>
+                  <span class="badge text-bg-light">
+                    <%= stock.elapsed_days %>日経過
+                  </span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="stock-actions">
+            <%= link_to "使い切った",
+                stock_path(stock),
+                data: { turbo_method: :delete, turbo_confirm: "削除しますか？" },
+                class: "btn btn-outline-danger btn-sm" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <div class="empty-title">在庫がまだありません</div>
+      <div class="empty-subtitle">「＋」から在庫を登録してみましょう</div>
+      <%= link_to "在庫を登録する", new_stock_path, class: "btn btn-primary mt-3" %>
+    </div>
+  <% end %>
+</div>

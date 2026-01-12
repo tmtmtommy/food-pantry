@@ -1,6 +1,16 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 
+html, body {
+  background-color: #9ee7ff !important;
+  min-height: 100%;
+}
+
+.page {
+  background: transparent;
+}
+
+
 /* =========================
    Top page（共通）
 ========================= */
@@ -150,7 +160,7 @@
 .auth-primary-btn {
   background: #fff;
   border: 1px solid rgba(0,0,0,0.06);
-  width: 100px;
+  width: 150px;
   margin: 0 auto;
 }
 
@@ -251,3 +261,255 @@ body {
   font-weight: 600;
 }
 
+/* =========================
+   Page base
+========================= */
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 18px 16px 90px; /* 下部ナビ分余白 */
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0;
+}
+
+.page-subtitle {
+  font-size: 13px;
+  margin: 6px 0 0;
+  opacity: 0.8;
+}
+
+/* =========================
+   Stock list
+========================= */
+.stock-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stock-card {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 14px 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.stock-name {
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.stock-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.stock-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* =========================
+   Empty
+========================= */
+.empty-state {
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px dashed rgba(0,0,0,0.15);
+  border-radius: 16px;
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.empty-title {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.empty-subtitle {
+  font-size: 13px;
+  margin-top: 6px;
+  opacity: 0.85;
+}
+
+/* 食材名＋メタ情報を横並び */
+.stock-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.stock-name {
+  font-weight: 800;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.stock-label {
+  margin-right: 4px;
+}
+
+/* =========================
+   Stock form
+========================= */
+.form-card {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 16px 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.form-section {
+  margin-bottom: 14px;
+}
+
+.form-label {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.form-help {
+  font-size: 12px;
+  opacity: 0.75;
+  margin-top: 6px;
+}
+
+.form-divider {
+  margin: 12px 0;
+  opacity: 0.15;
+}
+
+.form-actions {
+  margin-top: 12px;
+}
+
+.form-submit {
+  font-weight: 800;
+  border-radius: 12px;
+  padding: 10px 0;
+}
+
+/* =========================
+   Stock form
+========================= */
+.stock-form-card {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 18px 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+/* 購入日を小さめ＆左寄せに */
+.stock-date-input {
+  max-width: 180px;
+}
+
+/* スマホは少し広げる */
+@media (max-width: 576px) {
+  .stock-date-input {
+    max-width: 220px;
+  }
+}
+
+/* =========================
+   MyPage
+========================= */
+
+.mypage-card {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 16px;
+  padding: 22px 18px;
+
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(6px);
+}
+
+.mypage-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mypage-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.mypage-label {
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0.8;
+  margin-bottom: 6px;
+}
+
+.mypage-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ログアウトボタン：中は常に白 */
+.mypage-logout-btn {
+  background: #fff !important;
+}
+.mypage-logout-btn:hover,
+.mypage-logout-btn:focus {
+  background: #fff !important;
+}
+
+/* =========================
+   Global background (全ページ水色)
+========================= */
+/* 全ページ：背景は水色 */
+html, body {
+  background-color: #8fe3ff !important;
+  min-height: 100%;
+}
+
+/* ここが重要：Bootstrapのcontainer等が白背景になってたら透過させる */
+.container,
+.container-fluid {
+  background: transparent !important;
+}
+
+/* あなたのページラッパー（もし白背景を付けてたら） */
+.page,
+.page-stock-index,
+.page-stock-new,
+.page-mypage {
+  background: transparent !important;
+}
