@@ -33,7 +33,7 @@ class StocksController < ApplicationController
   private
 
   def stock_params
-    params.require(:stock).permit(:vegetable_id, :custom_name, :purchased_on)
+    params.require(:stock).permit(:mode, :vegetable_id, :custom_name, :purchased_on)
   end
 
 end

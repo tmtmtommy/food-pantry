@@ -12,6 +12,17 @@
           method: :post,
           data: { turbo: false } do |f| %>
 
+    <% if @stock.errors.any? %>
+      <div class="alert alert-danger mb-3">
+        <div class="fw-bold mb-1">入力内容を確認してください</div>
+        <ul class="mb-0">
+          <% @stock.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
       <!-- 購入日：左寄せ＆横幅小さく -->
       <div class="mb-3">
         <%= f.label :purchased_on, "購入日", class: "form-label fw-bold" %>
