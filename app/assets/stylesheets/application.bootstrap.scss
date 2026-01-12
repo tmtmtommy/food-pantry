@@ -1,6 +1,16 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 
+html, body {
+  background-color: #9ee7ff !important;
+  min-height: 100%;
+}
+
+.page {
+  background: transparent;
+}
+
+
 /* =========================
    Top page（共通）
 ========================= */
@@ -479,4 +489,27 @@ body {
 .mypage-logout-btn:hover,
 .mypage-logout-btn:focus {
   background: #fff !important;
+}
+
+/* =========================
+   Global background (全ページ水色)
+========================= */
+/* 全ページ：背景は水色 */
+html, body {
+  background-color: #8fe3ff !important;
+  min-height: 100%;
+}
+
+/* ここが重要：Bootstrapのcontainer等が白背景になってたら透過させる */
+.container,
+.container-fluid {
+  background: transparent !important;
+}
+
+/* あなたのページラッパー（もし白背景を付けてたら） */
+.page,
+.page-stock-index,
+.page-stock-new,
+.page-mypage {
+  background: transparent !important;
 }
