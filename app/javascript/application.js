@@ -15,9 +15,18 @@ const setupStockModeToggle = () => {
     if (modeCustom.checked) {
       masterFields.classList.add("d-none");
       customFields.classList.remove("d-none");
+
+      // ★ 追加：master側の値を消す
+      const vegetableSelect = document.getElementById("stock_vegetable_id");
+      if (vegetableSelect) vegetableSelect.value = "";
+
     } else {
       customFields.classList.add("d-none");
       masterFields.classList.remove("d-none");
+
+      // ★ 追加：custom側の値を消す
+      const customNameInput = document.getElementById("stock_custom_name");
+      if (customNameInput) customNameInput.value = "";
     }
   };
 
